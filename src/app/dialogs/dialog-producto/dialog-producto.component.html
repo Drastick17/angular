@@ -1,0 +1,56 @@
+<h1 mat-dialog-title> {{action}}</h1>
+<section mat-dialog-content>
+    <form [formGroup]="formEst">
+        <mat-grid-list cols="1" rowHeight="4.5rem">
+            <mat-grid-tile>
+                <mat-form-field style="width: 100%;" appearance="fill">
+                    <mat-label>Descripcion</mat-label>
+                    <input style="width: 100%;" matInput type="text" formControlName="pro_Descripcion"
+                        autocomplete="false" type="text">
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field style="width: 100%;" appearance="fill">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput type="text" formControlName="pro_Nombre" autocomplete="false" type="text">
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field style="width: 100%;" appearance="fill">
+                    <mat-label>Precio</mat-label>
+                    <input type="number" matInput formControlName="pro_Precio" autocomplete="false" type="text">
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field style="width: 100%;" appearance="fill">
+                    <mat-label>Iva</mat-label>
+                    <input type="number" matInput formControlName="pro_ExcentoIva" autocomplete="false" type="text">
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <!-- <input type="datetime" matInput formControlName="pro_FechaCreacion" autocomplete="false"
+                        type="text"> -->
+                <mat-form-field style="width: 100%; margin: 1rem 0;" appearance="fill" color="accent">
+                    <mat-label>Fecha</mat-label>
+                    <input matInput formControlName="pro_FechaCreacion" [matDatepicker]="picker1">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field style="width: 100%;" appearance="fill">
+                    <mat-label>Estado</mat-label>
+                    <mat-select formControlName="pro_Estado">
+                    <mat-option *ngFor="let item of listEstados" [value]="item.est_Id">{{item.est_Nombre}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+    <section style="width: 100%; display:flex;gap:0.5rem;justify-content:center;align-items:center">
+        <button mat-raised-button mat-dialog-close color="primary" (click)="handleProduct()"
+            [disabled]="formEst.invalid"
+            >{{buttonForm}}</button>
+        <button mat-raised-button mat-dialog-close color="warn">Close</button>
+    </section>
+</section>

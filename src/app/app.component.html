@@ -1,0 +1,90 @@
+<div style="max-width: 80%;margin: 20px auto; min-height:100vh;">
+  <div style="display:flex;flex-direction: row;gap:0.8rem; align-items: center;">
+    <app-export-button [data]="this.rawData">Exportar</app-export-button>
+    <button mat-button  mat-raised-button color="primary" (click)="openDialog()">Agregar</button>
+    <button mat-button  mat-raised-button color="primary" (click)="openDialogBuy()">Comprar</button>
+    <button mat-button  mat-raised-button color="primary" (click)="openDialogSell()">Vender</button>
+    <button mat-button  mat-raised-button color="primary" (click)="openDialogAnular()">Anular</button>
+
+  </div>
+  <h1 style="padding: 40px 20px 0 20px;">Lista de Estados de {{title}} </h1>
+  <section>
+    <mat-form-field style="min-width: 100%;padding: 20px;">
+      <mat-label>Busqueda</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Sancocho" #input>
+    </mat-form-field>
+  </section>
+  
+  <table mat-table [dataSource]="dataSourceProducto" class="mat-elevation-z8">
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="ID">
+      <th mat-header-cell *matHeaderCellDef> Id. </th>
+      <td mat-cell *matCellDef="let element"> {{element.PRO_Id}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="NOMBRE">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.PRO_Nombre}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="DESCRIPCION">
+      <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+      <td mat-cell *matCellDef="let element"> {{element.PRO_Descripcion}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="PRECIO">
+      <th mat-header-cell *matHeaderCellDef> Precio </th>
+      <td mat-cell *matCellDef="let element"> {{element.PRO_Precio}} </td>
+    </ng-container>
+    <ng-container matColumnDef="IVA">
+      <th mat-header-cell *matHeaderCellDef> ExcentoIva </th>
+      <td mat-cell *matCellDef="let element"> ${{element.PRO_ExcentoIva}} </td>
+    </ng-container>
+    <ng-container matColumnDef="FECHA DE CREACION">
+      <th mat-header-cell *matHeaderCellDef> Fecha de Creacion </th>
+      <td mat-cell *matCellDef="let element"> {{element.PRO_FechaCreacion  | date:'dd/MM/yyyy'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ESTADOID">
+      <th mat-header-cell *matHeaderCellDef> Estado </th>
+      <td mat-cell *matCellDef="let element"> {{element.PRO_Estado}} </td>
+    </ng-container>
+    <ng-container matColumnDef="STOCK">
+      <th mat-header-cell *matHeaderCellDef> Stock </th>
+      <td mat-cell *matCellDef="let element"> {{element.CantidadTotal}} </td>
+    </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="ACCION">
+          <th mat-header-cell *matHeaderCellDef> Accion </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="example-button-row">
+              <!-- <button (click)="openEditDialog(element)" color="primary"  mat-icon-button aria-label="Editar">
+                <mat-icon>edit</mat-icon>
+              </button> -->
+              <button (click)="openDeleteDialog(element.pro_Id)" color="warn"  mat-icon-button aria-label="Borrar">
+                <mat-icon>delete</mat-icon>
+              </button>
+              
+            </div>  
+          </td>
+        </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+  
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+  <mat-paginator style="margin-bottom:30px ;" [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons
+  aria-label="Select page of periodic elements">
+</mat-paginator>
+  
+</div>
+

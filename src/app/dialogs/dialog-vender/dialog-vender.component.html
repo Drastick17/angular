@@ -1,0 +1,36 @@
+<h1 mat-dialog-title> {{action}}</h1>
+<section mat-dialog-content>
+    <form [formGroup]="formEst">
+        <mat-grid-list cols="1" rowHeight="4.5rem">
+          <mat-grid-tile>
+            <mat-form-field style="width: 100%;" appearance="fill">
+                <mat-label>Producto</mat-label>
+                <mat-select formControlName="productID">
+                <mat-option *ngFor="let item of listProductos" [value]="item.pro_Id">{{item.pro_Nombre}} ${{item.pro_Precio}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+                <mat-form-field style="width: 100%; margin: 1rem 0;" appearance="fill" color="accent">
+                    <mat-label>Cantidad</mat-label>
+                    <input matInput formControlName="cantidad" type="number" min="1">
+                  
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field style="width: 100%;" appearance="fill">
+                    <mat-label>Estado</mat-label>
+                    <mat-select formControlName="estado">
+                    <mat-option *ngFor="let item of listEstados" [value]="item.est_Id">{{item.est_Nombre}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+    <section style="width: 100%; display:flex;gap:0.5rem;justify-content:center;align-items:center">
+        <button mat-raised-button mat-dialog-close color="primary" (click)="sell()"
+        [disabled]="formEst.invalid"
+            >{{buttonForm}}</button>
+        <button mat-raised-button mat-dialog-close color="warn">Close</button>
+    </section>
+</section>

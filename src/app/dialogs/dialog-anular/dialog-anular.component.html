@@ -1,0 +1,22 @@
+<h1 mat-dialog-title> {{action}}</h1>
+<section mat-dialog-content>
+    <form [formGroup]="formEst">
+        <mat-grid-list cols="1" rowHeight="4.5rem">
+    
+            <mat-grid-tile>
+                <mat-form-field style="width: 100%;" appearance="fill">
+                    <mat-label>Estado</mat-label>
+                    <mat-select formControlName="id">
+                    <mat-option *ngFor="let item of listVentas" [value]="item.hbod_Id">{{item.hbod_Movimiento}} - {{item.hbod_Cantidad}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+    <section style="width: 100%; display:flex;gap:0.5rem;justify-content:center;align-items:center">
+        <button mat-raised-button mat-dialog-close color="primary" (click)="anular()"
+        [disabled]="formEst.invalid"
+            >{{buttonForm}}</button>
+        <button mat-raised-button mat-dialog-close color="warn">Close</button>
+    </section>
+</section>
